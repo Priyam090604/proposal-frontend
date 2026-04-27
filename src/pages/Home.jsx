@@ -138,7 +138,18 @@ export default function Home() {
             <p className="text-white/40 text-sm md:text-base font-light max-w-sm mx-auto">Every picture holds a feeling I never want to forget.</p>
           </motion.div>
           <div className="w-full" style={{maxWidth:'940px'}}>
-            {cfg.gallery.length>0 && <Slider items={cfg.gallery}/>}
+            {cfg.gallery.length > 0 && (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    {cfg.gallery.map((item, i) => (
+      <img
+        key={i}
+        src={item.image}
+        alt={`photo-${i}`}
+        className="w-full rounded-xl shadow-lg"
+      />
+    ))}
+  </div>
+)}
           </div>
           <motion.div className="text-center mt-10 md:mt-14" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:.8}}>
             <button type="button" onClick={()=>scroll(heroRef)} className="btn btn-rose btn-lg text-base md:text-lg">Begin Our Story</button>
