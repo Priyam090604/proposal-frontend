@@ -123,39 +123,92 @@ export default function Home() {
       <MusicPlayer music={cfg.music}/>
 
       {/* ── GALLERY ── */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-20 md:pt-24 pb-12 md:pb-16"
-        style={{background:'radial-gradient(ellipse at 30% 0%,#1a063a 0%,#0c0820 35%,#04040e 80%)'}}>
-        <Stars count={200} shooting/>
-        <div className="absolute top-0 inset-x-0 h-64 pointer-events-none" style={{background:'linear-gradient(to bottom,rgba(124,58,237,.1),transparent)'}}/>
-        <div className="absolute bottom-0 inset-x-0 h-40 pointer-events-none" style={{background:'linear-gradient(to top,rgba(236,72,153,.06),transparent)'}}/>
-        <FloatingHearts rate={3200}/>
-        <div className="relative z-10 w-full flex flex-col items-center px-4 md:px-8">
-          <motion.div className="text-center mb-10 md:mb-14 max-w-2xl w-full" initial={{opacity:0,y:30}} animate={{opacity:1,y:0}} transition={{duration:1.2}}>
-            <div className="hr mb-5 max-w-[200px] mx-auto"><span className="lbl opacity-60">captured moments</span></div>
-            <h2 className="text-4xl sm:text-5xl md:text-7xl text-white font-light mb-4" style={{fontFamily:'Cormorant Garamond,serif',lineHeight:1.1}}>
-              Our Beautiful<br/><span className="italic grad-text-rose">Moments Together</span>
-            </h2>
-            <p className="text-white/40 text-sm md:text-base font-light max-w-sm mx-auto">Every picture holds a feeling I never want to forget.</p>
-          </motion.div>
-          <div className="w-full" style={{maxWidth:'940px'}}>
-            {cfg.gallery.length > 0 && (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    {cfg.gallery.map((item, i) => (
-      <img
-        key={i}
-        src={item.image}
-        alt={`photo-${i}`}
-        className="w-full rounded-xl shadow-lg"
-      />
-    ))}
+{/* ── GALLERY ── */}
+<section
+  className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-20 md:pt-24 pb-12 md:pb-16"
+  style={{
+    background:
+      'radial-gradient(ellipse at 30% 0%,#1a063a 0%,#0c0820 35%,#04040e 80%)',
+  }}
+>
+  <Stars count={200} shooting />
+
+  <div
+    className="absolute top-0 inset-x-0 h-64 pointer-events-none"
+    style={{
+      background:
+        'linear-gradient(to bottom,rgba(124,58,237,.1),transparent)',
+    }}
+  />
+
+  <div
+    className="absolute bottom-0 inset-x-0 h-40 pointer-events-none"
+    style={{
+      background:
+        'linear-gradient(to top,rgba(236,72,153,.06),transparent)',
+    }}
+  />
+
+  <FloatingHearts rate={3200} />
+
+  {/* Main Content */}
+  <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 flex flex-col items-center">
+
+    {/* Heading */}
+    <motion.div
+      className="text-center mb-10 md:mb-14 max-w-3xl w-full"
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.2 }}
+    >
+      <div className="hr mb-5 max-w-[220px] mx-auto">
+        <span className="lbl opacity-60">captured moments</span>
+      </div>
+
+      <h2
+        className="text-4xl sm:text-5xl md:text-7xl text-white font-light mb-4"
+        style={{
+          fontFamily: 'Cormorant Garamond,serif',
+          lineHeight: 1.1,
+        }}
+      >
+        Our Beautiful
+        <br />
+        <span className="italic grad-text-rose">
+          Moments Together
+        </span>
+      </h2>
+
+      <p className="text-white/40 text-sm md:text-base font-light max-w-md mx-auto">
+        Every picture holds a feeling I never want to forget.
+      </p>
+    </motion.div>
+
+    {/* Slider */}
+    {cfg.gallery.length > 0 && (
+      <div className="w-full flex justify-center items-center mt-6">
+        <Slider items={cfg.gallery} />
+      </div>
+    )}
+
+    {/* Button */}
+    <motion.div
+      className="text-center mt-10 md:mt-14"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.8 }}
+    >
+      <button
+        type="button"
+        onClick={() => scroll(heroRef)}
+        className="btn btn-rose btn-lg text-base md:text-lg"
+      >
+        Begin Our Story
+      </button>
+    </motion.div>
+
   </div>
-)}
-          </div>
-          <motion.div className="text-center mt-10 md:mt-14" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{delay:.8}}>
-            <button type="button" onClick={()=>scroll(heroRef)} className="btn btn-rose btn-lg text-base md:text-lg">Begin Our Story</button>
-          </motion.div>
-        </div>
-      </section>
+</section>
 
       {/* ── NIGHT SKY HERO ── */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden"
